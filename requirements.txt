@@ -1,0 +1,3 @@
+# requirements를 참조
+
+-r requirements/prod.txt

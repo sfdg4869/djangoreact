@@ -1,0 +1,4 @@
+#공통
+-r common.txt #common.txt를 읽어오겠다
+
+django-debug-toolbar

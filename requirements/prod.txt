@@ -1,0 +1,3 @@
+# 배포용
+
+-r common.txt #common.txt를 읽어오겠다
