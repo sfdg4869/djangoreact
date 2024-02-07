@@ -16,7 +16,7 @@ from os.path import abspath, dirname
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = dirname(dirname(abspath(__file__)))
+BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     'debug_toolbar',
-
+    'bootstrap4',
     #local apps
-    
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -92,6 +92,8 @@ DATABASES = {
     }
 }
 
+
+AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
