@@ -30,7 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+ADMINS  =[
+    ('ks jung', 'sfdg4869@gmail.com'),
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     # third apps
     'debug_toolbar',
     'bootstrap4',
+    'django_pydenticon',
     #local apps
     'accounts',
 ]
@@ -141,3 +144,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 INTERNAL_IPS = ['127.0.0.1']
+
+EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST_USER = 'wjdrudtn97' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = 'mughgcvytr725'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+WELCOME_EMAIL_SENDER = ""
