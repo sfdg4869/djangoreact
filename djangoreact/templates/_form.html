@@ -7,14 +7,18 @@
     {% endif %}
     </div>
     <div class="card-body">
-        <form action ="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-            <button type="submit" class="btn btn-primary">
-                {{ submit_label|default:"submit"}}
-            </button>
-            {% endbuttons %}
+        {% if form %}
+            <form action ="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        {{ submit_label|default:"submit"}}
+                    </button>
+                {% endbuttons %}
         </form>
+        {% else %}
+            <div class="alert alert-danger">
+        {% endif %}
     </div>    
   </div>
