@@ -5,3 +5,4 @@ django~=3.0.14
 django-bootstrap4
 pillow
 django-pydenticon
+easy-thumbnails
