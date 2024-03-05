@@ -11,14 +11,14 @@ from datetime import timedelta
 
 @login_required
 def index(request):
-    timezone.now - timedelta()
+    timesince = timezone.now() - timedelta(days=3)
     post_list = Post.objects.all()\
        .filter(
            Q(author=request.user) |
            Q(author__in=request.user.following_set.all())
        )\
        .filter(
-           created_at__gte = 
+           created_at__gte = timesince
        )
     suggested_user_list = get_user_model().objects.all()\
         .exclude(pk=request.user.pk)\
@@ -57,6 +57,22 @@ def post_detail(request, pk):
     return render(request, "instagram/post_detail.html",{
         "post": post,
     })
+
+@login_required
+def post_like(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.like_user_set.add(request.user)
+    messages.success(request, f"{post}를 좋아합니다.")
+    redirect_url = request.META.get("HTTP_REFERER", "root")
+    return redirect(redirect_url)
+
+@login_required
+def post_unlike(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.like_user_set.remove(request.user)
+    messages.success(request, f"{post}를 좋아요를 취소합니다.")
+    redirect_url = request.META.get("HTTP_REFERER", "root")
+    return redirect(redirect_url)
 
 def user_page(request, username):
     page_user = get_object_or_404(get_user_model(), username=username, is_active=True)
