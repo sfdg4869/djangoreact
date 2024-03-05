@@ -5,14 +5,20 @@ from django.contrib import messages
 from .models import Post
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.utils import timezone
+from datetime import timedelta
 # Create your views here.
 
 @login_required
 def index(request):
+    timezone.now - timedelta()
     post_list = Post.objects.all()\
        .filter(
            Q(author=request.user) |
            Q(author__in=request.user.following_set.all())
+       )\
+       .filter(
+           created_at__gte = 
        )
     suggested_user_list = get_user_model().objects.all()\
         .exclude(pk=request.user.pk)\
