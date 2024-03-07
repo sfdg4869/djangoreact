@@ -3,7 +3,16 @@ from django.conf import settings
 import re
 from django.urls import reverse
 # Create your models here.
-class Post(models.Model):
+
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        abstract = True
+
+
+class Post(BaseModel):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='my_post_set', 
                                on_delete=models.CASCADE)
     photo = models.ImageField(upload_to="instagram/post/%Y/%m/%d")
@@ -36,7 +45,18 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-id']
-    
+
+
+class Comment(BaseModel):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    message = models.TextField()
+
+    class Meta:
+        ordering = ['-id']
+
+
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
